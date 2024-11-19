@@ -1,5 +1,3 @@
-#[macro_use] extern crate rocket;
-#[macro_use] extern crate diesel;
 pub mod models;
 pub mod schema;
 
@@ -14,19 +12,3 @@ pub fn establish_connection() -> SqliteConnection {
     SqliteConnection::establish(&database_url)
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
-
-#[get("/hello")]
-fn hello() -> String {
-    format!("Hello")
-}
-
-#[get("/world")]
-fn world() -> String {
-    format!("World!")
-}
-
-#[launch]
-fn rocket() -> _ {
-    rocket::build().mount("/", routes![hello, world])
-}
-
